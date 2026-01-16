@@ -4,6 +4,13 @@ An end-to-end, production-style CI/CD pipeline on AWS using Docker, Amazon ECS F
 
 ---
 
+## Architectural Diagram
+<p align="center">
+  <img src="./assets/architectural-diagram.png" width="800" />
+</p>
+
+---
+
 ## Overview of Project ☁️
 
 **FreshEats**, a fast-growing food delivery startup, is rapidly adding new features to its backend services to support menus, pricing updates, and promotions.
@@ -41,12 +48,5 @@ Every code change pushed to GitHub automatically:
 3. Deploys the updated version to ECS 
 
 This ensures **consistent deployments, faster releases, and production-grade reliability.**
-
----
-
-## Architectural Diagram
-<p align="center">
-  <img src="./assets/architectural-diagram.png" width="800" />
-</p>
 
 ---
