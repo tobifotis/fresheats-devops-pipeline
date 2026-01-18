@@ -1,0 +1,24 @@
+{
+  "name": "fresheats-devops-pipeline",
+  "version": "1.0.0",
+  "description": "An end-to-end, production-style CI/CD pipeline on AWS using Docker, Amazon ECS Fargate, and GitHub Actions to achieve zero-downtime deployments.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobifotis/fresheats-devops-pipeline.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tobifotis/fresheats-devops-pipeline/issues"
+  },
+  "homepage": "https://github.com/tobifotis/fresheats-devops-pipeline#readme",
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Delivery Menu</title>
+
+    <style>
+      :root {
+        --orange: #470000;
+        --bg: #f3f4f6;
+        --text: #111827;
+        --muted: #636b7a;
+        --card: #ffffff;
+        --row: #f9fafb;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      /* Header */
+      .header {
+        background: var(--orange);
+        color: white;
+        padding: 28px 16px;
+        text-align: center;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .header .version {
+        margin-top: 10px;
+        font-size: 14px;
+        opacity: 0.95;
+      }
+
+      /* Page layout */
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 28px 16px 60px;
+      }
+
+      /* Menu card */
+      .menu-card {
+        width: min(560px, 100%);
+        margin: 0 auto;
+        background: var(--card);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 14px;
+      }
+
+      .menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .menu-item {
+        background: var(--row);
+        border-radius: 6px;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .menu-item .name {
+        font-weight: 600;
+      }
+
+      .menu-item .price {
+        font-weight: 700;
+        color: #1f2937;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        color: var(--muted);
+        margin-top: 40px;
+        font-size: 13px;
+      }
+
+      /* Error */
+      .error {
+        width: min(560px, 100%);
+        margin: 14px auto 0;
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>🍔 Tobi Delivery Menu</h1>
+      <div class="version" id="version">Version: Loading...</div>
+    </div>
+
+    <div class="wrap">
+      <div class="menu-card">
+        <ul class="menu-list" id="menu"></ul>
+      </div>
+
+      <div id="error" class="error" style="display:none;"></div>
+
+      <div class="footer">Food Menu Service • CI/CD Demo</div>
+    </div>
+
+    <script>
+      async function loadVersion() {
+        const res = await fetch("/version");
+        if (!res.ok) throw new Error("Failed to load version");
+        const data = await res.json();
+        document.getElementById("version").textContent = `Version: ${data.version}`;
+      }
+
+      async function loadMenu() {
+        const res = await fetch("/api/menu");
+        if (!res.ok) throw new Error("Failed to load menu");
+        const items = await res.json();
+
+        const ul = document.getElementById("menu");
+        ul.innerHTML = "";
+
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "menu-item";
+
+          const name = document.createElement("div");
+          name.className = "name";
+          name.textContent = item.name;
+
+          const price = document.createElement("div");
+          price.className = "price";
+
+          // If your backend returns numbers, show $.
+          // If it returns currency strings like "₹299", keep them.
+          const p = item.price;
+          price.textContent = typeof p === "number" ? `$${p}` : String(p);
+
+          li.appendChild(name);
+          li.appendChild(price);
+          ul.appendChild(li);
+        });
+      }
+
+      async function init() {
+        try {
+          await Promise.all([loadVersion(), loadMenu()]);
+        } catch (err) {
+          const error = document.getElementById("error");
+          error.style.display = "block";
+          error.textContent = err.message;
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>
