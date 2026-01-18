@@ -1,0 +1,65 @@
+# --------------------
+# Node.js
+# --------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --------------------
+# Environment variables
+# --------------------
+.env
+.env.*
+!.env.example
+
+# --------------------
+# OS / Editor files
+# --------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# --------------------
+# Build / runtime artifacts
+# --------------------
+dist/
+build/
+coverage/
+
+# --------------------
+# Docker
+# --------------------
+*.tar
+docker-compose.override.yml
+
+# --------------------
+# Logs
+# --------------------
+logs/
+*.log
+
+# --------------------
+# Terraform (future-proof)
+# --------------------
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
+*.tfvars
+
+# --------------------
+# AWS / credentials
+# --------------------
+.aws/
+*.pem
+*.key
+
+# --------------------
+# Misc
+# --------------------
+.cache/
+tmp/
